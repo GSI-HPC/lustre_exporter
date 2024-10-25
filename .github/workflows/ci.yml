@@ -36,7 +36,7 @@ jobs:
           docker run --rm -v $PWD:/cpy lustre_exporter:binary
           sudo chown -R $USER:$GROUP build
       - name: Upload binary
-        uses: actions/upload-artifact@v1.0.0
+        uses: actions/upload-artifact@v4
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           name: lustre-exporter Binary ${{ github.ref_name }}
@@ -48,7 +48,7 @@ jobs:
           docker run --rm -v $PWD:/rpm lustre_exporter:rpm
           sudo chown -R $USER:$GROUP build
       - name: Upload RPM
-        uses: actions/upload-artifact@v1.0.0
+        uses: actions/upload-artifact@v4
         if: startsWith(github.ref, 'refs/tags/v')
         with:
           name: lustre-exporter RPM ${{ github.ref_name }}
