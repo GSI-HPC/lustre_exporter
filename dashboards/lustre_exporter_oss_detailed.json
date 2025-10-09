@@ -96,10 +96,6 @@
   "panels": [
     {
       "collapsed": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "yKpIni7nk"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -322,10 +318,6 @@
     },
     {
       "collapsed": false,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "yKpIni7nk"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -529,10 +521,6 @@
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "yKpIni7nk"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -728,10 +716,6 @@
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "yKpIni7nk"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -942,10 +926,6 @@
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "yKpIni7nk"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
@@ -1073,10 +1053,6 @@
     },
     {
       "collapsed": true,
-      "datasource": {
-        "type": "prometheus",
-        "uid": "yKpIni7nk"
-      },
       "gridPos": {
         "h": 1,
         "w": 24,
