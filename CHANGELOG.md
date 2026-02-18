@@ -1,5 +1,9 @@
 # Change Log
 
+## [v2.1.7](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.7) (2023-05-24)
+
+- Fix Changelog user/current index post lustre 2.15
+
 ## [v2.1.6](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.6) (2023-05-24)
 - Provide LNET metrics for Lustre version 2.12[\#31](https://github.com/GSI-HPC/lustre_exporter/issues/31)
 - Improve error handling if file paths are invalid for sources
