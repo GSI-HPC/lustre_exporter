@@ -27,7 +27,7 @@ var (
 	lctlGetParamArgs                  = []string{"lctl", "get_param"}
 	changelogTargetRegexPattern       = regexp.MustCompile(`mdd.([\w\d-]+-MDT[\d]+).changelog_users=`)
 	changelogCurrentIndexRegexPattern = regexp.MustCompile(`current[_\s]index: (\d+)`)
-	changelogUserRegexPattern         = regexp.MustCompile(`(?ms:(cl\d+)\s+(\d+) \((\d+)\))`)
+	changelogUserRegexPattern         = regexp.MustCompile(`(?ms:(cl\d+[a-zA-Z-]*)\s+(\d+) \((\d+)\))`)
 )
 
 const (
