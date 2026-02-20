@@ -1,14 +1,14 @@
-FROM centos:7
-MAINTAINER jknedlik <j.knedlik@gsi.de>
+FROM rockylinux:8
+LABEL org.opencontainers.image.authors="j.knedlik@gsi.de"
 WORKDIR /tmp
 RUN yum install -y git make gcc rpm-build
 RUN curl -LO https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
 RUN tar -C /usr/local -xvzf go1.17.5.linux-amd64.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin
+RUN mkdir /go
 COPY . /go/lustre_exporter
 WORKDIR /go/lustre_exporter
 RUN rpm/build.sh
 RUN mkdir /rpm
-ENTRYPOINT ["/bin/sh"]
 ENTRYPOINT ["cp"]
 CMD ["-r","/root/rpmbuild/RPMS/x86_64/","/rpm/build"]
