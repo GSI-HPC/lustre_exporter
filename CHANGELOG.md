@@ -1,8 +1,16 @@
 # Change Log
 
-## [v2.1.7](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.7) (2023-05-24)
+## [v2.1.8](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.8) (2026-02-25)
 
-- Fix Changelog user/current index post lustre 2.15
+- Allow Custom Changelog user name
+- Fix Dockerfile warnings [\#45](https://github.com/GSI-HPC/lustre_exporter/issues/45)
+
+**Merged pull requests:**
+- Fix job_id regex to allow for quotes in newer versions [PR47](https://github.com/GSI-HPC/lustre_exporter/pull/47)
+
+## [v2.1.7](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.7) (2026-02-18)
+
+- Fix createMDTChangelogUsersMetrics error after each metrics query [\#36](https://github.com/GSI-HPC/lustre_exporter/issues/36)
 
 ## [v2.1.6](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.6) (2023-05-24)
 - Provide LNET metrics for Lustre version 2.12[\#31](https://github.com/GSI-HPC/lustre_exporter/issues/31)
