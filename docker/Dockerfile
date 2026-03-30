@@ -1,4 +1,4 @@
-FROM golang:1.17.5-bullseye
+FROM golang:1.26.1-bookworm
 LABEL org.opencontainers.image.authors="j.knedlik@gsi.de"
 RUN apt-get update
 COPY . /go/lustre_exporter

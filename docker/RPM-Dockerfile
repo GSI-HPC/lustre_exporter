@@ -2,8 +2,8 @@ FROM rockylinux:8
 LABEL org.opencontainers.image.authors="j.knedlik@gsi.de"
 WORKDIR /tmp
 RUN yum install -y git make gcc rpm-build
-RUN curl -LO https://go.dev/dl/go1.17.5.linux-amd64.tar.gz
-RUN tar -C /usr/local -xvzf go1.17.5.linux-amd64.tar.gz
+RUN curl -LO https://go.dev/dl/go1.26.1.linux-amd64.tar.gz
+RUN tar -C /usr/local -xvzf go1.26.1.linux-amd64.tar.gz
 ENV PATH=$PATH:/usr/local/go/bin
 RUN mkdir /go
 COPY . /go/lustre_exporter
