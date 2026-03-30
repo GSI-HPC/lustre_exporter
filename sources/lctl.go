@@ -10,7 +10,7 @@ package sources
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"reflect"
@@ -139,7 +139,7 @@ func (s *lustreLctlSource) createMDTChangelogUsersMetrics(lctlParam string) ([]p
 
 		path := filepath.Join("lctl", paramPath)
 
-		out, err := ioutil.ReadFile(path)
+		out, err := os.ReadFile(path)
 		if err != nil {
 			return nil, err
 		}
