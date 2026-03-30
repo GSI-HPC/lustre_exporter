@@ -14,7 +14,7 @@
 package sources
 
 import (
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -144,7 +144,7 @@ func (s *LustreSysFsSource) parseTextFile(nodeType string, metricType string, pa
 	if err != nil {
 		return err
 	}
-	fileBytes, err := ioutil.ReadFile(filepath.Clean(path))
+	fileBytes, err := os.ReadFile(filepath.Clean(path))
 	if err != nil {
 		return err
 	}
@@ -175,7 +175,7 @@ func (s *LustreSysFsSource) parseFile(nodeType string, metricType string, path s
 	}
 	switch metricType {
 	case single:
-		value, err := ioutil.ReadFile(filepath.Clean(path))
+		value, err := os.ReadFile(filepath.Clean(path))
 		if err != nil {
 			return err
 		}
