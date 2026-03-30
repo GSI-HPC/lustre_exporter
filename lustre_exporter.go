@@ -43,17 +43,17 @@ var (
 	exporterVersion string
 )
 
-//LustreSource is a list of all sources that the user would like to collect.
+// LustreSource is a list of all sources that the user would like to collect.
 type LustreSource struct {
 	sourceList map[string]sources.LustreSource
 }
 
-//Describe implements the prometheus.Describe interface
+// Describe implements the prometheus.Describe interface
 func (l LustreSource) Describe(ch chan<- *prometheus.Desc) {
 	scrapeDurations.Describe(ch)
 }
 
-//Collect implements the prometheus.Collect interface
+// Collect implements the prometheus.Collect interface
 func (l LustreSource) Collect(ch chan<- prometheus.Metric) {
 	wg := sync.WaitGroup{}
 	wg.Add(len(l.sourceList))

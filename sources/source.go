@@ -28,13 +28,13 @@ var SysLocation = "/sys"
 // With false a local file is processed with test data.
 var LctlCommandMode = true
 
-//Namespace defines the namespace shared by all Lustre metrics.
+// Namespace defines the namespace shared by all Lustre metrics.
 const Namespace = "lustre"
 
-//Factories contains the list of all sources.
+// Factories contains the list of all sources.
 var Factories = make(map[string]func() LustreSource)
 
-//LustreSource is the interface that each source implements.
+// LustreSource is the interface that each source implements.
 type LustreSource interface {
 	Update(ch chan<- prometheus.Metric) (err error)
 }
