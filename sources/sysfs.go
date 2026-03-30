@@ -110,6 +110,32 @@ func (s *LustreSysFsSource) generateMGSMetricTemplates(filter string) {
 	}
 }
 
+func (s *LustreSysFsSource) generateMDTMetricTemplates(filter string) {
+	metricMap := map[string][]lustreHelpStruct{
+		"osd-*/*-MDT*": {
+			{"blocksize", "blocksize_bytes", "Filesystem block size in bytes", gaugeMetric, false, core},
+			{"filesfree", "inodes_free", "The number of inodes (objects) available", gaugeMetric, false, core},
+			{"filestotal", "inodes_maximum", "The maximum number of inodes (objects) the filesystem can hold", gaugeMetric, false, core},
+			{"kbytesavail", "available_kibibytes", "Number of kibibytes readily available in the pool", gaugeMetric, false, core},
+			{"kbytesfree", "free_kibibytes", "Number of kibibytes free in the pool", gaugeMetric, false, core},
+			{"kbytestotal", "capacity_kibibytes", "Capacity of the pool in kibibytes", gaugeMetric, false, core},
+		},
+		"mdt/*": {
+			{mdStats, "stats_total", statsHelp, counterMetric, true, core},
+			{"num_exports", "exports_total", "Total number of times the pool has been exported", counterMetric, false, core},
+			{"job_stats", "job_stats_total", jobStatsHelp, counterMetric, true, core},
+		},
+	}
+	for path := range metricMap {
+		for _, item := range metricMap[path] {
+			if filter == extended || item.priorityLevel == core {
+				newMetric := newLustreProcMetric(item.filename, item.promName, "mdt", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
+			}
+		}
+	}
+}
+
 func newLustreSysFsSource() LustreSource {
 	var l LustreSysFsSource
 	l.basePath = filepath.Join(SysLocation, "fs/lustre")
@@ -121,6 +147,9 @@ func newLustreSysFsSource() LustreSource {
 	}
 	if MgsEnabled != disabled {
 		l.generateMGSMetricTemplates(OstEnabled)
+	}
+	if MdtEnabled != disabled {
+		l.generateMDTMetricTemplates(OstEnabled)
 	}
 	return &l
 }
