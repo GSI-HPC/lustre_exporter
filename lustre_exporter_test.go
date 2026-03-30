@@ -26,6 +26,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/common/expfmt"
+	"github.com/prometheus/common/model"
 )
 
 type labelPair struct {
@@ -1765,7 +1766,7 @@ func TestCollector(t *testing.T) {
 			t.Fatalf("Failed to GET data from prometheus: %v", err)
 		}
 
-		var parser expfmt.TextParser
+		parser := expfmt.NewTextParser(model.UTF8Validation)
 
 		metricFamilies, err := parser.TextToMetricFamilies(resp.Body)
 		if err != nil {
