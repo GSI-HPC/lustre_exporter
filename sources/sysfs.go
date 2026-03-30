@@ -89,6 +89,27 @@ func (s *LustreSysFsSource) generateOSTMetricTemplates(filter string) {
 	}
 }
 
+func (s *LustreSysFsSource) generateMGSMetricTemplates(filter string) {
+	metricMap := map[string][]lustreHelpStruct{
+		"mgs/MGS/osd/": {
+			{"blocksize", "blocksize_bytes", "Filesystem block size in bytes", gaugeMetric, false, core},
+			{"filesfree", "inodes_free", "The number of inodes (objects) available", gaugeMetric, false, core},
+			{"filestotal", "inodes_maximum", "The maximum number of inodes (objects) the filesystem can hold", gaugeMetric, false, core},
+			{"kbytesavail", "available_kibibytes", "Number of kibibytes readily available in the pool", gaugeMetric, false, core},
+			{"kbytesfree", "free_kibibytes", "Number of kibibytes free in the pool", gaugeMetric, false, core},
+			{"kbytestotal", "capacity_kibibytes", "Capacity of the pool in kibibytes", gaugeMetric, false, core},
+		},
+	}
+	for path := range metricMap {
+		for _, item := range metricMap[path] {
+			if filter == extended || item.priorityLevel == core {
+				newMetric := newLustreProcMetric(item.filename, item.promName, "mgs", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
+			}
+		}
+	}
+}
+
 func newLustreSysFsSource() LustreSource {
 	var l LustreSysFsSource
 	l.basePath = filepath.Join(SysLocation, "fs/lustre")
@@ -97,6 +118,9 @@ func newLustreSysFsSource() LustreSource {
 	}
 	if OstEnabled != disabled {
 		l.generateOSTMetricTemplates(OstEnabled)
+	}
+	if MgsEnabled != disabled {
+		l.generateMGSMetricTemplates(OstEnabled)
 	}
 	return &l
 }
