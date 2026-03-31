@@ -78,6 +78,19 @@ func (s *LustreSysFsSource) generateOSTMetricTemplates(filter string) {
 			{"pool/grant_plan", "lock_grant_plan", "Number of planned lock grants per second", gaugeMetric, false, extended},
 			{"pool/grant_rate", "lock_grant_rate", "Lock grant rate", gaugeMetric, false, extended},
 		},
+		"osd-*/*-OST*": {
+			{"blocksize", "blocksize_bytes", "Filesystem block size in bytes", gaugeMetric, false, core},
+			{"brw_stats", "pages_per_bulk_rw_total", pagesPerBlockRWHelp, counterMetric, false, extended},
+			{"brw_stats", "discontiguous_pages_total", discontiguousPagesHelp, counterMetric, false, extended},
+			{"brw_stats", "disk_io", diskIOsInFlightHelp, gaugeMetric, false, core},
+			{"brw_stats", "io_time_milliseconds_total", ioTimeHelp, counterMetric, false, core},
+			{"brw_stats", "disk_io_total", diskIOSizeHelp, counterMetric, false, core},
+			{"filesfree", "inodes_free", "The number of inodes (objects) available", gaugeMetric, false, core},
+			{"filestotal", "inodes_maximum", "The maximum number of inodes (objects) the filesystem can hold", gaugeMetric, false, core},
+			{"kbytesfree", "free_kibibytes", "Number of kibibytes free in the pool", gaugeMetric, false, core},
+			{"kbytesavail", "available_kibibytes", "Number of kibibytes readily available in the pool", gaugeMetric, false, core},
+			{"kbytestotal", "capacity_kibibytes", "Capacity of the pool in kibibytes", gaugeMetric, false, core},
+		},
 	}
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
