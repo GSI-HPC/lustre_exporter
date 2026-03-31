@@ -1,5 +1,13 @@
 # Change Log
 
+## [v2.1.9](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.9) (2026-03-31)
+
+- Update to go version 1.26.1
+- Update all dependencies to latest version
+- Fix linter/ library api changes
+- Update Dockerfiles
+- Get more MGS, MDT and OST metrics via sysfs
+
 ## [v2.1.8](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.8) (2026-02-25)
 
 - Allow Custom Changelog user name
