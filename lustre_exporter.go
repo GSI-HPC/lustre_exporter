@@ -25,6 +25,7 @@ import (
 	"github.com/GSI-HPC/lustre_exporter/sources"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	versioncollector "github.com/prometheus/client_golang/prometheus/collectors/version"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
@@ -180,6 +181,7 @@ func main() {
 		log.Infof(" - %s", s)
 	}
 
+	prometheus.MustRegister(versioncollector.NewCollector(sources.Namespace))
 	prometheus.MustRegister(LustreSource{sourceList: sourceList})
 	//load InstrumentMetricHandler
 	handler := promhttp.InstrumentMetricHandler(prometheus.DefaultRegisterer,
