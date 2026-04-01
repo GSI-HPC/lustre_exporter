@@ -1,4 +1,10 @@
+---
+# SPDX-FileCopyrightText: 2026 GSI Helmholtzzentrum fuer Schwerionenforschung GmbH, Darmstadt, Germany
+#
+# SPDX-License-Identifier: CC0-1.0
+
 name: Continuous Integration
+
 on:
   pull_request:
     types:
@@ -21,6 +27,14 @@ jobs:
     steps:
       - name: Check out repository contents
         uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version: '1.26'
+
+      - name: Vet
+        run: go vet ./...
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
       - name: Build binary
