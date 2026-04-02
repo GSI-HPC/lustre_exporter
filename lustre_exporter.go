@@ -21,11 +21,13 @@ import (
 	"os"
 	"sync"
 	"time"
+	"strings"
 
 	"github.com/GSI-HPC/lustre_exporter/sources"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	versioncollector "github.com/prometheus/client_golang/prometheus/collectors/version"
+	"github.com/prometheus/common/version"
 	log "github.com/sirupsen/logrus"
 	"gopkg.in/alecthomas/kingpin.v2"
 )
@@ -180,7 +182,7 @@ func main() {
 	for s := range sourceList {
 		log.Infof(" - %s", s)
 	}
-
+	version.Version = strings.TrimSpace(exporterVersion)
 	prometheus.MustRegister(versioncollector.NewCollector(sources.Namespace))
 	prometheus.MustRegister(LustreSource{sourceList: sourceList})
 	//load InstrumentMetricHandler
