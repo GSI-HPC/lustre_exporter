@@ -129,9 +129,10 @@ func main() {
 	)
 
 	kingpin.Parse()
+	version.Version = strings.TrimSpace(exporterVersion)
 
 	if *printVersion {
-		fmt.Print(exporterVersion)
+		fmt.Print(version.Print("lustre_exporter"))
 		os.Exit(0)
 	}
 
@@ -146,7 +147,8 @@ func main() {
 		initLogFile(*logFile)
 	}
 
-	log.Info("Starting...")
+	log.Infof("Starting lustre_exporter %s", version.Info())
+	log.Debugf("Build context: %s", version.BuildContext())
 
 	log.Infof("Collector status:")
 	sources.OstEnabled = *ostEnabled
@@ -182,7 +184,6 @@ func main() {
 	for s := range sourceList {
 		log.Infof(" - %s", s)
 	}
-	version.Version = strings.TrimSpace(exporterVersion)
 	prometheus.MustRegister(versioncollector.NewCollector(sources.Namespace))
 	prometheus.MustRegister(LustreSource{sourceList: sourceList})
 	//load InstrumentMetricHandler
