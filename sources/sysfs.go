@@ -159,10 +159,10 @@ func newLustreSysFsSource() LustreSource {
 		l.generateOSTMetricTemplates(OstEnabled)
 	}
 	if MgsEnabled != disabled {
-		l.generateMGSMetricTemplates(OstEnabled)
+		l.generateMGSMetricTemplates(MgsEnabled)
 	}
 	if MdtEnabled != disabled {
-		l.generateMDTMetricTemplates(OstEnabled)
+		l.generateMDTMetricTemplates(MdtEnabled)
 	}
 	return &l
 }
