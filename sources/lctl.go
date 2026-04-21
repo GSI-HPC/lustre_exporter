@@ -1,6 +1,6 @@
 // -*- coding: utf-8 -*-
 //
-// © Copyright 2023 GSI Helmholtzzentrum für Schwerionenforschung
+// © Copyright 2023-2025 GSI Helmholtzzentrum für Schwerionenforschung
 //
 // This software is distributed under
 // the terms of the GNU General Public Licence version 3 (GPL Version 3),
@@ -117,12 +117,7 @@ func (s *lustreLctlSource) generateMDTMetricCreator(filter string) {
 	}
 }
 
-func (s *lustreLctlSource) createMDTChangelogUsersMetrics(lctlParam string) ([]prometheus.Metric, error) {
-	metricList := make([]prometheus.Metric, 1)
-	var target string
-	var data string
-	var err error
-
+func runLctlGetParam(lctlParam string) (string, error) {
 	if LctlCommandMode {
 		lctlCmdArgs := append(lctlGetParamArgs, lctlParam)
 		if log.GetLevel() == log.DebugLevel {
@@ -130,20 +125,29 @@ func (s *lustreLctlSource) createMDTChangelogUsersMetrics(lctlParam string) ([]p
 		}
 		out, err := exec.Command("sudo", lctlCmdArgs...).Output()
 		if err != nil {
-			return nil, err
+			return "", err
 		}
-		data = string(out)
+		return string(out), nil
+	}
 
-	} else {
-		paramPath := strings.ReplaceAll(lctlParam, ".", OSPathSeparator)
+	// for the testsuite:
+	paramPath := strings.ReplaceAll(lctlParam, ".", OSPathSeparator)
+	path := filepath.Join("lctl", paramPath)
+	out, err := os.ReadFile(path)
+	if err != nil {
+		return "", err
+	}
+	return string(out), nil
+}
 
-		path := filepath.Join("lctl", paramPath)
+func (s *lustreLctlSource) createMDTChangelogUsersMetrics(lctlParam string) ([]prometheus.Metric, error) {
+	metricList := make([]prometheus.Metric, 1)
+	var target string
+	var err error
 
-		out, err := os.ReadFile(path)
-		if err != nil {
-			return nil, err
-		}
-		data = string(out)
+	data, err := runLctlGetParam(lctlParam)
+	if err != nil {
+		return nil, err
 	}
 
 	target, err = regexCaptureChangelogTarget(data)
