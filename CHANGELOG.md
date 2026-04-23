@@ -1,5 +1,19 @@
 # Change Log
 
+## [v2.1.10](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.10) (2026-04-23)
+
+- Fix regex for job stats
+- Allow somewhat more complex jobids
+- Refactor runLctlGetParam for running lctl get_param
+- Refactor toggleCollectors
+- Fix: Use MDT and MGS enabled values properly
+- Refactor version handling
+- Add exporter Version to build info
+- Export lustre_build_info metric
+- Update Changelog
+- Move osd/OST disk statistics to sysfs
+- Generate MDT metrics from sysfs
+
 ## [v2.1.9](https://github.com/GSI-HPC/lustre_exporter/releases/tag/2.1.9) (2026-03-31)
 
 - Update to go version 1.26.1
