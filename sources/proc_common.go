@@ -36,7 +36,7 @@ const (
 
 var (
 	numRegexPattern      = regexp.MustCompile(`[0-9]*\.[0-9]+|[0-9]+`)
-	jobidRegexPattern    = regexp.MustCompile(`(?m:job_id:\s*"?([\d\w\-_.:+\/\\()]+)"?)`)
+	jobidRegexPattern    = regexp.MustCompile(`job_id:[ \t]*"?([^"\n\r]*)"?`)
 	jobStatsRegexPattern = regexp.MustCompile(`(?ms:job_id:.*?$.*?(?:-|\z))`)
 )
 
