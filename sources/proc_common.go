@@ -69,15 +69,15 @@ type lustreHelpStruct struct {
 	priorityLevel   string
 }
 
-func newLustreProcMetric(filename string, promName string, source string, path string, helpText string, hasMultipleVals bool, metricFunc prometheusType) *lustreProcMetric {
+func newLustreProcMetric(item *lustreHelpStruct, source string, path string) *lustreProcMetric {
 	return &lustreProcMetric{
-		filename:        filename,
-		promName:        promName,
+		filename:        item.filename,
+		promName:        item.promName,
 		source:          source,
 		path:            path,
-		helpText:        helpText,
-		hasMultipleVals: hasMultipleVals,
-		metricFunc:      metricFunc,
+		helpText:        item.helpText,
+		hasMultipleVals: item.hasMultipleVals,
+		metricFunc:      item.metricFunc,
 	}
 }
 

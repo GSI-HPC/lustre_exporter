@@ -83,7 +83,7 @@ func (s *lustreSysSource) generateLNETTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "lnet", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "lnet", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}

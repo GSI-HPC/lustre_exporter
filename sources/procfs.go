@@ -160,7 +160,7 @@ func (s *lustreProcFsSource) generateOSTMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "ost", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "ost", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -186,7 +186,7 @@ func (s *lustreProcFsSource) generateMDTMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mdt", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "mdt", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -207,7 +207,7 @@ func (s *lustreProcFsSource) generateMGSMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mgs", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "mgs", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -219,7 +219,7 @@ func (s *lustreProcFsSource) generateMDSMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mds", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "mds", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -267,7 +267,7 @@ func (s *lustreProcFsSource) generateClientMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "client", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "client", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -297,7 +297,7 @@ func (s *lustreProcFsSource) generateGenericMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "generic", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "generic", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}

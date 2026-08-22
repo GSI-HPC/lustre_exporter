@@ -51,7 +51,7 @@ func (s *LustreSysFsSource) generateHealthStatusTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "health", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "health", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -95,7 +95,7 @@ func (s *LustreSysFsSource) generateOSTMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "ost", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "ost", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -116,7 +116,7 @@ func (s *LustreSysFsSource) generateMGSMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mgs", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "mgs", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
@@ -142,7 +142,7 @@ func (s *LustreSysFsSource) generateMDTMetricTemplates(filter string) {
 	for path := range metricMap {
 		for _, item := range metricMap[path] {
 			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mdt", path, item.helpText, item.hasMultipleVals, item.metricFunc)
+				newMetric := newLustreProcMetric(&item, "mdt", path)
 				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
 			}
 		}
